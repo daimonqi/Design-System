@@ -1,0 +1,1173 @@
+{
+  "version": "2.10",
+  "children": [
+    {
+      "type": "frame",
+      "id": "89pBP",
+      "x": 75,
+      "y": 98,
+      "name": "Frame 2065065121",
+      "clip": true,
+      "width": 400,
+      "fill": "#2b2b36ff",
+      "cornerRadius": 4,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#ffffff33"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#00000066",
+        "offset": {
+          "x": 0,
+          "y": 4
+        },
+        "blur": 35
+      },
+      "gap": 24,
+      "padding": 24,
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "VsOoJ",
+          "name": "Frame 2065068301",
+          "width": "fill_container",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          },
+          "gap": 16,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "T4Qrr",
+              "name": "Frame 2065068613",
+              "width": "fill_container",
+              "height": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1
+              },
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "w2b8R",
+                  "name": "Frame 2065067565",
+                  "width": 44,
+                  "height": 44,
+                  "fill": [
+                    {
+                      "type": "image",
+                      "enabled": true,
+                      "url": "",
+                      "mode": "fill"
+                    },
+                    {
+                      "type": "image",
+                      "enabled": true,
+                      "url": "",
+                      "mode": "fill"
+                    },
+                    {
+                      "type": "image",
+                      "enabled": true,
+                      "url": "",
+                      "mode": "fill"
+                    },
+                    {
+                      "type": "image",
+                      "enabled": false,
+                      "url": "",
+                      "mode": "stretch"
+                    },
+                    {
+                      "type": "image",
+                      "enabled": false,
+                      "url": "",
+                      "mode": "fill"
+                    }
+                  ],
+                  "cornerRadius": 4,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 0.5846154093742371
+                  },
+                  "layout": "vertical",
+                  "padding": 9.84615421295166,
+                  "justifyContent": "end",
+                  "alignItems": "center"
+                },
+                {
+                  "type": "frame",
+                  "id": "Gkaaq",
+                  "name": "Frame 2065067990",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "lmwQd",
+                      "name": "topRow",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "end",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "s4X75",
+                          "name": "title",
+                          "fill": "#ffffffee",
+                          "content": "资源更新包",
+                          "fontFamily": "Microsoft YaHei UI",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iAk7x",
+                          "name": "#标签名称",
+                          "fill": "#ffffff80",
+                          "content": "233.0Mdps",
+                          "lineHeight": 1.2857142857142858,
+                          "fontFamily": "Microsoft YaHei UI",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ObzxJ",
+                      "name": "进度条",
+                      "width": "fill_container",
+                      "fill": "#ffffff33",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1
+                      },
+                      "layout": "vertical",
+                      "gap": 10,
+                      "children": [
+                        {
+                          "type": "rectangle",
+                          "id": "pM2GN",
+                          "name": "Progress Bar",
+                          "fill": {
+                            "type": "gradient",
+                            "gradientType": "linear",
+                            "enabled": true,
+                            "rotation": -450,
+                            "size": {
+                              "height": 1
+                            },
+                            "colors": [
+                              {
+                                "color": "#ff7210ff",
+                                "position": 0
+                              },
+                              {
+                                "color": "#f56c0fff",
+                                "position": 0.5336538553237915
+                              },
+                              {
+                                "color": "#a63d05ff",
+                                "position": 1
+                              }
+                            ]
+                          },
+                          "width": "fill_container",
+                          "height": 6,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "yHHqS",
+              "name": "#标签名称",
+              "fill": "#ffffff99",
+              "content": "已完成10%",
+              "lineHeight": 1.375,
+              "fontFamily": "Microsoft YaHei UI",
+              "fontSize": 16,
+              "fontWeight": "700"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ekIzR",
+      "x": 168.41933983990384,
+      "y": 269,
+      "name": "icon/16/下载",
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.7828746438026428
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "VO2TB",
+          "x": 2,
+          "y": 1,
+          "name": "Vector",
+          "geometry": "M12 15l-12 0 0-2 12 0 0 2z m-4.5-15c0.27614 0 0.5 0.22386 0.5 0.5l0 5.5 2.61914 0c0.46736 0.00014 0.67899 0.58435 0.32031 0.88379l-4.61914 3.84961c-0.18542 0.15452-0.4552 0.15452-0.64062 0l-4.61914-3.84961c-0.35868-0.29944-0.14705-0.88365 0.32031-0.88379l2.61914 0 0-5.5c0-0.27614 0.22386-0.5 0.5-0.5l3 0z",
+          "fill": "#ffffffcc",
+          "width": 12,
+          "height": 15
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "exLxd",
+      "x": 204.41933983990384,
+      "y": 269,
+      "name": "icon/16/更新",
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.7828746438026428
+      },
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "dkRnG",
+      "x": 240.41933983990384,
+      "y": 269,
+      "name": "icon/16/更多",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "xIfoS",
+          "x": 3,
+          "y": 7,
+          "name": "Vector",
+          "geometry": "M2 1c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z m4 0c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z m4 0c0 0.55228-0.44772 1-1 1-0.55228 0-1-0.44772-1-1 0-0.55228 0.44772-1 1-1 0.55228 0 1 0.44772 1 1z",
+          "fill": "#ffffffcc",
+          "width": 10,
+          "height": 2,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "2DmD8",
+      "x": 276.41933983990384,
+      "y": 269,
+      "name": "icon/16/发动态",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "gap": 10,
+      "padding": [
+        1,
+        2
+      ],
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "path",
+          "id": "yM7RS",
+          "name": "Rectangle 161126328",
+          "geometry": "M12 14l-12 0 0-12 6 0m6 12l0-6m0.5-8l-6.5 8.5",
+          "width": 12.5,
+          "height": 14,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffcc"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "fechm",
+      "x": 307.41933983990384,
+      "y": 269,
+      "name": "icon/16/添加",
+      "clip": true,
+      "fill": {
+        "type": "color",
+        "color": "#ffffffff",
+        "enabled": false
+      },
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.5454545617103577
+      },
+      "gap": 10,
+      "padding": 2,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "path",
+          "id": "K9sAn",
+          "name": "Vector",
+          "geometry": "M12 6l-12 0m6 6l0-12",
+          "width": 12,
+          "height": 12,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffcc"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Udfzj",
+      "x": 343.41933983990384,
+      "y": 269,
+      "name": "icon/16/刷新",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.8333333730697632
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "ivlk9",
+          "x": 1.16015625,
+          "y": 1.5012823343276978,
+          "name": "Union",
+          "geometry": "M13.33984 6.54657c-0.01113 1.50354-0.54353 2.95702-1.50586 4.1123-0.96232 1.15524-2.29573 1.94094-3.77246 2.22364-1.47653 0.28257-3.00538 0.04514-4.32617-0.67286-0.84667-0.46032-1.5734-1.1005-2.13574-1.86718l0 1.36523-1.59961 0 0-3.71484 3.71484 0 0 1.59961-0.67382 0c0.39995 0.49101 0.89356 0.904 1.458 1.21093 0.9957 0.54134 2.14858 0.72082 3.26172 0.50782 1.11326-0.21311 2.1183-0.80585 2.84375-1.67676 0.72541-0.8709 1.12637-1.9662 1.13477-3.09961l1.60058 0.01172z m-8.11035-6.34375c1.3984-0.35762 2.87627-0.24008 4.2002 0.33496 1.06008 0.4605 1.9728 1.19341 2.65039 2.11719l0-1.36524 1.59961 0 0 3.71485-3.71485 0 0-1.59961 0.67286 0c-0.49201-0.60389-1.12336-1.08564-1.84571-1.39942-0.99799-0.43347-2.11187-0.52248-3.16601-0.25293-1.05423 0.26967-1.9889 0.88268-2.65625 1.74219-0.66735 0.85955-1.03027 1.91668-1.03028 3.00488l-1.59961 0c0-1.44353 0.48095-2.84611 1.36621-3.98632 0.88525-1.14007 2.12505-1.95284 3.52344-2.31055z",
+          "fill": "#ffffffcc",
+          "width": 13.6796875,
+          "height": 12.998470306396484
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "0lwSw",
+      "x": 168.41933983990384,
+      "y": 312,
+      "name": "icon/20/会员",
+      "clip": true,
+      "width": 20,
+      "height": 20,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.26274511218070984
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "6MMbH",
+          "x": 2,
+          "y": 2,
+          "name": "Rectangle 161124242",
+          "opacity": 0.800000011920929,
+          "geometry": "M0 3.47223l4.20647 0.76902 4.20646-4.24125 4.00805 4.24125 4.00805-0.76902-1.26988 11.9568-13.88927 0-1.26988-11.9568z",
+          "width": 16,
+          "height": 15,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "join": "round",
+            "fill": {
+              "type": "gradient",
+              "gradientType": "linear",
+              "enabled": true,
+              "rotation": -331.4859124026709,
+              "size": {
+                "height": 1.2252616125278228
+              },
+              "colors": [
+                {
+                  "color": "#a8a2ffff",
+                  "position": 0
+                },
+                {
+                  "color": "#ffe4b7ff",
+                  "position": 1
+                }
+              ],
+              "center": {
+                "x": 0.6100844024999685,
+                "y": 0.5469063423457431
+              }
+            }
+          }
+        },
+        {
+          "type": "path",
+          "id": "ot2tC",
+          "x": 5.599609375,
+          "y": 8,
+          "name": "Vector 428 (Stroke)",
+          "geometry": "M6.73633 0.76758l-3.36817 5.36816-3.36816-5.36816 1.76758-0.76758 1.60058 2.60059 1.60059-2.60059 1.76758 0.76758z",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": -323.7710482151877,
+            "size": {
+              "height": 0.8730878821926851
+            },
+            "colors": [
+              {
+                "color": "#aa92ffff",
+                "position": 0
+              },
+              {
+                "color": "#ffdea5ff",
+                "position": 1
+              }
+            ],
+            "center": {
+              "x": 0.4431707154991448,
+              "y": 0.49954464526505904
+            }
+          },
+          "width": 8.800000190734863,
+          "height": 8.007291793823242,
+          "stroke": {
+            "align": "center",
+            "thickness": 3.2625601291656494
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ngKh5",
+      "x": 208.41933983990384,
+      "y": 312,
+      "name": "icon/20/乐币",
+      "width": 20,
+      "height": 20,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.8333333730697632
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "oXOPH",
+          "x": 2,
+          "y": 2,
+          "name": "Ellipse 15158",
+          "sweepAngle": -360.00001001791264,
+          "width": 16,
+          "height": 16,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.600000023841858,
+            "join": "round",
+            "fill": "#ffffffe5"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "aSR1w",
+      "x": 248.41933983990384,
+      "y": 312,
+      "name": "icon/20/消息",
+      "width": 20,
+      "height": 20,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1.0185184478759766
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "ulgWa",
+          "x": 2.7275390625,
+          "y": 3.63671875,
+          "name": "Rectangle 161124329",
+          "geometry": "M0 0l14.54546 0 0 11.90909-3.63637 0-3.63636 3.18182-3.63637-3.18182-3.63636 0 0-11.90909z",
+          "width": 14.545454978942871,
+          "height": 15.09090805053711,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffe5"
+          }
+        },
+        {
+          "type": "path",
+          "id": "qPluN",
+          "x": 7.2724609375,
+          "y": 10.9091796875,
+          "name": "Vector 433",
+          "rotation": 1.4033419209422001e-14,
+          "geometry": "M0 0l3 1.5 3-1.5",
+          "width": 5.454545497894287,
+          "height": 1.3636363744735718,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffe5"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "g74PC",
+      "x": 288.41933983990384,
+      "y": 312,
+      "name": "icon/20/下载",
+      "width": 20,
+      "height": 20,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.8333333730697632
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "GTG1p",
+          "x": 2,
+          "y": 2,
+          "name": "Ellipse 15158",
+          "sweepAngle": -360.00001001791264,
+          "width": 16,
+          "height": 16,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.600000023841858,
+            "join": "round",
+            "fill": "#ffffffe5"
+          }
+        },
+        {
+          "type": "path",
+          "id": "NidRB",
+          "x": 7,
+          "y": 6,
+          "name": "Vector 433",
+          "rotation": 1.4033419209422001e-14,
+          "geometry": "M0 4.32728l2.99998 2.43395 3.00002-2.43395m-3.00002-4.32728l0 6.76123",
+          "width": 6,
+          "height": 6.761226654052734,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffe5"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "owxME",
+      "x": 429.41933983990384,
+      "y": 312,
+      "name": "ion/20/升级",
+      "width": 20,
+      "height": 20,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.8333333730697632
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "MVBCw",
+          "x": 2,
+          "y": 2,
+          "name": "Ellipse 15158",
+          "sweepAngle": -360.00001001791264,
+          "width": 16,
+          "height": 16,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.600000023841858,
+            "join": "round",
+            "fill": "#ffffffe5"
+          }
+        },
+        {
+          "type": "path",
+          "id": "wpF4c",
+          "x": 13,
+          "y": 13.76122760772705,
+          "name": "Vector 433",
+          "rotation": 179.99999499104345,
+          "geometry": "M0 4.32728l2.99998 2.43395 3.00002-2.43395m-3.00002-4.32728l0 6.76123",
+          "width": 6,
+          "height": 6.761226654052734,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffe5"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "IXKJu",
+      "x": 328.41933983990384,
+      "y": 312,
+      "name": "icon/20/筛选",
+      "clip": true,
+      "width": 20,
+      "height": 20,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1.25
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "RTuDm",
+          "x": 1.9228515625,
+          "y": 2.5,
+          "name": "Rectangle 60",
+          "geometry": "M0 0l11.91956 0 0 3.22989-3.89371 2.7682 0 6.42333-4.79596 1.07663 0-7.49996-3.22989-3.30652 0-2.69157z",
+          "fill": {
+            "type": "color",
+            "color": "#d9d9d9ff",
+            "enabled": false
+          },
+          "width": 14.899444580078125,
+          "height": 16.87255859375,
+          "stroke": {
+            "align": "inside",
+            "thickness": 2,
+            "join": "round",
+            "fill": "#ffffffcc"
+          }
+        },
+        {
+          "type": "rectangle",
+          "id": "Nt7mn",
+          "x": 13.75,
+          "y": 11.248046875,
+          "name": "Rectangle 3467683",
+          "fill": "#ffffffcc",
+          "width": 4.8834228515625,
+          "height": 1.5,
+          "stroke": {
+            "align": "inside",
+            "thickness": 2
+          }
+        },
+        {
+          "type": "rectangle",
+          "id": "Ro8VV",
+          "x": 13.75,
+          "y": 15.921875,
+          "name": "Rectangle 3467684",
+          "fill": "#ffffffcc",
+          "width": 4.8834228515625,
+          "height": 1.5,
+          "stroke": {
+            "align": "inside",
+            "thickness": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "lmzuW",
+      "x": 462.41933983990384,
+      "y": 269,
+      "name": "icon/16/关闭",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "WZVDs",
+          "x": 2,
+          "y": 2,
+          "name": "Vector",
+          "geometry": "M0.24902 12.00041l11.75072-11.74068m-11.99974-0.25973l11.75072 11.74068",
+          "width": 11.999743461608887,
+          "height": 12.000406265258789,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffff99"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "0aa3m",
+      "x": 490.41933983990384,
+      "y": 269,
+      "name": "icon/16/启动",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "1Q2lf",
+      "x": 376.41933983990384,
+      "y": 268,
+      "name": "icon/16/等待",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "UVECA",
+          "x": 2.5380778312683105,
+          "y": 1.6367602348327637,
+          "name": "Vector",
+          "geometry": "M0 10.87378l10.92384-8.88467m-10.92384 0l10.92384 8.88467m-10.92384-10.87378l0 1.98911m10.92384-1.98911l-10.92384 0m10.92384 1.98911l0-1.98911m-10.92384 12.72648l0-1.8527m10.92384 1.8527l-10.92384 0m10.92384-1.8527l0 1.8527",
+          "width": 10.923844337463379,
+          "height": 12.726479530334473,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffcc"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "6l2rs",
+      "x": 364.41933983990384,
+      "y": 312,
+      "name": "icon/20/磁盘",
+      "clip": true,
+      "width": 20,
+      "height": 20,
+      "fill": {
+        "type": "color",
+        "color": "#ffffffff",
+        "enabled": false
+      },
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.8695652484893799
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "qm9On",
+          "x": 1.25,
+          "y": 4.166015625,
+          "name": "Vector",
+          "geometry": "M896 522.70001c0 41.29999-33.40002 74.70001-74.70001 74.70001l-746.59999 0c-41.3 0-74.7-33.40002-74.7-74.70001l0-149.29999c0-41.29998 33.4-74.70001 74.7-74.70001l746.70002 0c41.29999 0 74.69996 33.40003 74.69996 74.70001l0 149.29999-0.09998 0z m-821.3-273.60002c-13.8 0-35.29999 4.29999-47.9 9.49999l150-225.19999c12.2-18.4 40.09999-33.39999 61.99999-33.39999l417.70001 0c22.20001 0 49.89996 14.79999 62.29999 33.39999l150 225.19999c-15.29999-5.7-31.5-9.1-47.70001-9.49999l-746.39998 0z m472.8 198.90001c0 27.39999 22.20001 49.90002 49.90002 49.90002 27.40003 0 49.89997-22.20001 49.89997-49.90002 0-27.39999-22.39997-49.89996-49.89997-49.89996-27.5 0.29998-49.90002 22.49997-49.90002 49.89996z m149.29999 0c0 27.39999 22.20001 49.90002 49.90002 49.90002 27.40003 0 49.89997-22.20001 49.89997-49.90002 0-27.39999-22.39997-49.89996-49.89997-49.89996-27.5 0.29998-49.90002 22.49997-49.90002 49.89996z",
+          "fill": "#ffffffe5",
+          "width": 17.501953125,
+          "height": 11.667969703674316,
+          "stroke": {
+            "align": "inside",
+            "thickness": 0.01953125
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "AXzhc",
+      "x": 399.41933983990384,
+      "y": 312,
+      "name": "icon/20/搜索",
+      "clip": true,
+      "width": 20,
+      "height": 20,
+      "fill": {
+        "type": "color",
+        "color": "#ffffffff",
+        "enabled": false
+      },
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "bLzGi",
+      "x": 433.41933983990384,
+      "y": 285,
+      "name": "ion/16/排序",
+      "rotation": 90.00000250447827,
+      "clip": true,
+      "width": 16,
+      "height": 15.99999713897705,
+      "cornerRadius": 2.6666665077209473,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.6666666269302368
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "0EiQs",
+          "x": 3.350586175918579,
+          "y": 3.3330063819885254,
+          "name": "Vector 186",
+          "rotation": -4.5370994197638843e-7,
+          "geometry": "M0 1.7567l5.70926 0-1.45726-1.7567",
+          "width": 9.29649829864502,
+          "height": 2.342261791229248,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "join": "round",
+            "cap": "square",
+            "fill": "#ffffff99"
+          }
+        },
+        {
+          "type": "path",
+          "id": "rBn8Q",
+          "x": 12.6494140625,
+          "y": 12.666991233825684,
+          "name": "Vector 187",
+          "rotation": 179.99999499104388,
+          "geometry": "M0 2l6.5 0-1.65909-2",
+          "width": 9.29649829864502,
+          "height": 2.342261791229248,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "join": "round",
+            "cap": "square",
+            "fill": "#ffffff99"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "0OEcA",
+      "x": 403.41933983990384,
+      "y": 268,
+      "name": "icon/16/等待中",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "EoLpZ",
+          "x": 1,
+          "y": 1,
+          "name": "Ellipse 15336",
+          "sweepAngle": -360.00001001791264,
+          "width": 14,
+          "height": 14,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffcc"
+          }
+        },
+        {
+          "type": "path",
+          "id": "J7rSG",
+          "x": 8,
+          "y": 4,
+          "name": "Vector 15356",
+          "geometry": "M0 0l0 4 2.5 1.44338",
+          "width": 2.5,
+          "height": 5.443375587463379,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffcc"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "eVejh",
+      "x": 515.4193398399038,
+      "y": 268,
+      "name": "icon/16/游戏",
+      "rotation": -1.5902773407317584e-15,
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "fill": {
+        "type": "color",
+        "color": "#ffffffff",
+        "enabled": false
+      },
+      "stroke": {
+        "align": "inside",
+        "thickness": 1.1787015199661255
+      },
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "QSssk",
+      "x": 541.4193398399038,
+      "y": 268,
+      "name": "icon/16/错误",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "Hjg3s",
+      "x": 509.41933983990384,
+      "y": 314,
+      "name": "icon/16/收藏",
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1.010735034942627
+      },
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "u6zwn",
+      "x": 459.41933983990384,
+      "y": 314,
+      "name": "icon/16/评论",
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.9040178060531616
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "uj8te",
+          "x": 1.5390625,
+          "y": 2.169921875,
+          "name": "Rectangle 161124321",
+          "geometry": "M0 0l12 0 0 10-8 0-4 1.50001 0-1.82609 0-9.67392z",
+          "width": 12.923077583312988,
+          "height": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.2000000476837158,
+            "fill": "#ffffff99"
+          }
+        },
+        {
+          "type": "path",
+          "id": "wd7xn",
+          "x": 5,
+          "y": 6,
+          "name": "Vector 427",
+          "geometry": "M6 0l-6 0m4 2.5l-4 0",
+          "width": 7,
+          "height": 3,
+          "stroke": {
+            "align": "center",
+            "thickness": 1.2000000476837158,
+            "fill": "#ffffff99"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "CQdJ2",
+      "x": 487.41933983990384,
+      "y": 314,
+      "name": "icon/16/分享",
+      "clip": true,
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "yjP0i",
+          "x": 1.86328125,
+          "y": 2,
+          "name": "Frame 2065067386",
+          "width": 12.272393226623535,
+          "height": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 0.8766189813613892
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "path",
+              "id": "XhJii",
+              "x": 0.3095703125,
+              "y": 1.0146484375,
+              "name": "Ellipse 274",
+              "geometry": "M15 7.5c0 4.14214-3.35786 7.5-7.5 7.5-4.14214 0-7.5-3.35786-7.5-7.5 0-4.14214 3.35786-7.5 7.5-7.5",
+              "width": 10.683768272399902,
+              "height": 10.683768272399902,
+              "stroke": {
+                "align": "outside",
+                "thickness": 1.2000000476837158,
+                "join": "round",
+                "cap": "round",
+                "fill": "#ffffff99"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "otiZL",
+      "x": 541.4193398399038,
+      "y": 316,
+      "name": "icon/16/设置",
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.6666666865348816
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "path",
+          "id": "fNhCS",
+          "x": 2.23046875,
+          "y": 1.3375976085662842,
+          "name": "Polygon 43",
+          "rotation": 3.1805546814635168e-15,
+          "geometry": "M7.21223 0l7.21223 4.16398 0 8.32797-7.21223 4.16398-7.21223-4.16398 0-8.32797 7.21223-4.16398z",
+          "width": 11.539567947387695,
+          "height": 13.324745178222656,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1.600000023841858,
+            "fill": "#ffffffcc"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "9dcvb",
+          "x": 6.800000190734863,
+          "y": 6.800000190734863,
+          "name": "Ellipse 15369",
+          "sweepAngle": -360.00001001791264,
+          "fill": "#ffffffcc",
+          "width": 2.4000000953674316,
+          "height": 2.4000000953674316,
+          "stroke": {
+            "align": "inside",
+            "thickness": 0.800000011920929
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ph4Pf",
+      "x": 577.4193398399038,
+      "y": 316,
+      "name": "icon/20/设置",
+      "width": 16,
+      "height": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 0.6666666865348816
+      },
+      "layout": "none"
+    }
+  ]
+}
