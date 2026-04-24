@@ -1,0 +1,315 @@
+/* f:/aiUI/game_download_btn/game_download_btn.css */
+.btn-progress {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  width: 296px;
+  height: 48px;
+  border-radius: 6px; /* Matched to .btn--lg */
+  background-color: var(--white-5, rgba(255, 255, 255, 0.05));
+  box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: var(--font-family-base);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Gradient Stroke using pseudo-element */
+.btn-progress::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: inherit;
+  padding: 0.5px; /* Stroke thickness */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.btn-progress:not(.btn-progress--completed):not(.btn-progress--complete-anim):hover {
+  background-color: var(--white-10, rgba(255, 255, 255, 0.1));
+}
+
+.btn-progress:not(.btn-progress--completed):not(.btn-progress--complete-anim):active {
+  background-color: rgba(255, 255, 255, 0.02);
+  box-shadow: inset 0px 1px 4px 0px rgba(255, 255, 255, 0.05);
+}
+
+.btn-progress__content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  transition: filter 0.3s ease;
+}
+
+/* For states with icon (Downloading) */
+.btn-progress svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  display: block;
+  flex-shrink: 0;
+}
+
+.btn-progress__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-progress__text-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  padding-left: 8px;
+  padding-right: 20px;
+}
+
+.btn-progress__title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--white-100, #ffffff);
+  white-space: nowrap;
+}
+
+.btn-progress__size {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.size-current {
+  font-weight: bold;
+  color: var(--white-80, rgba(255, 255, 255, 0.8));
+}
+
+.size-divider {
+  font-weight: normal;
+  color: var(--white-60, rgba(255, 255, 255, 0.6));
+}
+
+.size-total {
+  font-weight: bold;
+  color: var(--white-60, rgba(255, 255, 255, 0.6));
+}
+
+/* Progress bar at the bottom */
+.btn-progress__bar-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 3;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-progress__bar {
+  height: 100%;
+  background-color: var(--primary-6, #FF7210);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0 1px 1px 0;
+}
+
+/* Modifiers for Installing State */
+.btn-progress--installing .btn-progress__content {
+  justify-content: center;
+}
+
+.btn-progress--installing .btn-progress__text-group {
+  justify-content: center;
+  padding: 0;
+}
+
+/* ==================================================
+   4. Completion Transition (Volumetric Light & Ignition)
+   ================================================== */
+
+/* Dedicated Animation Layer for Volumetric Blobs */
+.btn-progress__anim-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1; /* Behind content, above background */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-progress--complete-anim .btn-progress__anim-layer {
+  opacity: 1;
+}
+
+/* ORGANIC VOLUMETRIC BLOBS (Natural Scattering Light) */
+.btn-progress__anim-layer .anim-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  mix-blend-mode: plus-lighter;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+/* Blob 1: Bright White/Teal Core */
+.anim-blob--1 {
+  width: 160px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(45, 212, 191, 0.4) 60%, transparent 100%);
+  left: -40px;
+  top: -20px;
+}
+
+/* Blob 2: Indigo/Blue Ambient */
+.anim-blob--2 {
+  width: 200px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, rgba(79, 70, 229, 0.2) 70%, transparent 100%);
+  right: -60px;
+  bottom: -40px;
+}
+
+/* Blob 3: Warm Orange Accent */
+.anim-blob--3 {
+  width: 180px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(255, 114, 16, 0.6) 0%, rgba(166, 61, 5, 0.3) 70%, transparent 100%);
+  left: 20%;
+  top: 10%;
+}
+
+/* Animation Sequence for Completion */
+.btn-progress--complete-anim .anim-blob--1 {
+  animation: blob-volumetric-1 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.btn-progress--complete-anim .anim-blob--2 {
+  animation: blob-volumetric-2 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+}
+
+.btn-progress--complete-anim .anim-blob--3 {
+  animation: blob-volumetric-3 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+
+@keyframes blob-volumetric-1 {
+  0% { transform: translate(-80px, 0) scale(0.6) rotate(0deg); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(320px, -20px) scale(1.8) rotate(45deg); opacity: 0; }
+}
+
+@keyframes blob-volumetric-2 {
+  0% { transform: translate(80px, 20px) scale(0.5) rotate(0deg); opacity: 0; }
+  40% { opacity: 0.9; }
+  100% { transform: translate(-320px, -40px) scale(2.2) rotate(-30deg); opacity: 0; }
+}
+
+@keyframes blob-volumetric-3 {
+  0% { transform: scale(0.4) rotate(0deg); opacity: 0; }
+  50% { transform: scale(2.5) rotate(15deg); opacity: 0.8; }
+  100% { transform: scale(2) rotate(30deg); opacity: 0; }
+}
+
+/* Refined Background Transition (Solid to Solid) */
+/* Refined Background Transition */
+.btn-progress--complete-anim {
+  background-color: rgba(166, 61, 5, 0.7); 
+}
+
+/* Synchronized Optical Glow on Text/Icon */
+/* Synchronized Optical Glow on Text/Icon */
+.btn-progress--complete-anim .btn-progress__content {
+  animation: content-optical-brightening 1.2s ease-in-out forwards;
+}
+
+@keyframes content-optical-brightening {
+  0% { filter: brightness(1); }
+  40% { filter: brightness(1.2); }
+  100% { filter: brightness(1); }
+}
+
+/* Final state after animation (EXACT CLONE of .btn--fill) */
+.btn-progress--completed {
+  color: var(--white-80);
+  border: none;
+  background: 
+    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 114, 16, 0.4) 0%, rgba(166, 61, 5, 0) 100%), 
+    rgba(166, 61, 5, 0.7);
+  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), 
+              inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-progress--completed:hover {
+  color: var(--white-100);
+  background: 
+    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 114, 16, 0.75) 0%, rgba(166, 61, 5, 0) 100%), 
+    rgba(166, 61, 5, 0.85);
+  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), 
+              inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+}
+
+.btn-progress--completed:active {
+  color: var(--white-60);
+  background: 
+    radial-gradient(ellipse 50% 80% at 50% 0%, rgba(255, 114, 16, 0.2) 0%, rgba(166, 61, 5, 0) 100%), 
+    rgba(166, 61, 5, 0.6);
+  box-shadow: 0px 4px 12px 0px rgba(166, 61, 5, 0.3), 
+              inset 0px 0px 4px 0px rgba(255, 114, 16, 0.05);
+}
+
+/* Use the design system's border stroke (::after) in final state */
+.btn-progress--completed::after {
+  content: ''; position: absolute; inset: 0; padding: 0.5px; border-radius: inherit;
+  background: 
+    radial-gradient(ellipse 30px 2px at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, rgba(255, 223, 201, 0.5) 0%, rgba(255, 223, 201, 0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+  opacity: 1;
+}
+
+/* Hide progress and center content in final states */
+.btn-progress--completed .btn-progress__bar-wrapper,
+.btn-progress--complete-anim .btn-progress__bar-wrapper,
+.btn-progress--completed .btn-progress__size,
+.btn-progress--complete-anim .btn-progress__size {
+  display: none;
+}
+
+.btn-progress--completed .btn-progress__content,
+.btn-progress--complete-anim .btn-progress__content {
+  justify-content: center;
+  gap: 4px; /* Matched to design system .btn gap */
+}
+
+.btn-progress--completed .btn-progress__icon-wrapper,
+.btn-progress--complete-anim .btn-progress__icon-wrapper {
+  margin: 0;
+}
+
+.btn-progress--completed .btn-progress__text-group,
+.btn-progress--complete-anim .btn-progress__text-group {
+  flex: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Width variations */
+.btn-progress.w-238 { width: 238px; }
+.btn-progress.w-296 { width: 296px; }
+.w-296 { width: 296px; }
