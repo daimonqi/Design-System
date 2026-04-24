@@ -1,0 +1,217 @@
+/* f:\aiUI\index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+  /* 1.1 品牌橙主色矩阵 (Brand Primary) */
+  --primary-0-alpha: rgba(255, 114, 16, 0.3); /* 30% 发光/底垫 */
+  --primary-1: #FFF5E8;
+  --primary-5: #FF933B;
+  --primary-6: #FF7210; /* 主色 */
+  --primary-7: #D2570A;
+  --primary-10: #723307;
+
+  /* 1.2 暗黑空间背景层控矩阵 */
+  --color-background: #101017;
+  --color-bg-dialog: #2B2B36;
+  
+  /* 1.3 文本颜色与交互层控矩阵 (严格匹配 V5 规范) */
+  --text-bright: #FFFFFF;           /* white-100% 强文本 */
+  --text-primary: #FFFFFFCC;        /* white-80% 主正文 */
+  --text-secondary: #FFFFFF99;      /* white-60% 次级文 */
+  --text-tertiary: #FFFFFF66;       /* white-40% 弱化文 */
+  --text-ghost: #FFFFFF33;          /* white-20% 幽灵态 */
+  
+  /* 1.4 蓝色链接色 (外链专用) */
+  --color-link-blue: #409EFF;
+  --color-link-blue-hover: #66B1FF;
+
+  /* 全局字体池 - 约束使用 Microsoft YaHei UI */
+  --font-family-base: "Microsoft YaHei UI", "Microsoft YaHei", -apple-system, sans-serif;
+}
+
+/* ==================================================
+   1. 容器交互系统 (Container Hover System)
+   ================================================== */
+
+/* [开发调用] 基础提亮 (基础)：从无背景平滑过渡到 5% 白色遮罩 */
+.hover-container-base {
+    position: relative;
+    background-color: transparent;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px; /* 默认半径 */
+}
+.hover-container-base:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* [开发调用] 动效增强 (有动效)：基础提亮 + 边缘旋转光泽描边 */
+.hover-container-glow {
+    position: relative;
+    background-color: transparent;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+}
+.hover-container-glow:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 动效核心逻辑：利用 @property 驱动 conic-gradient 旋转 */
+@property --angle { 
+  syntax: '<angle>'; 
+  initial-value: 0deg; 
+  inherits: false; 
+}
+
+@keyframes border-rotate-v5 {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+.hover-container-glow:hover::before { 
+  content: "";
+  position: absolute;
+  inset: 0px;
+  padding: 1px; /* 1px 描边厚度 */
+  border-radius: inherit; 
+  background: conic-gradient(
+    from var(--angle), 
+    rgba(255, 255, 255, 0.5) 0%, 
+    transparent 10%, 
+    transparent 40%, 
+    rgba(255, 255, 255, 0.5) 50%, 
+    transparent 60%, 
+    transparent 90%, 
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  animation: 4s linear infinite border-rotate-v5;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* [开发调用] 纯文字模式：容器完全透明，不产生背景反馈 */
+.hover-container-none {
+    background-color: transparent !important;
+    transition: none;
+}
+
+/* ==================================================
+   2. 文本交互系统 (Typography Hover System)
+   ================================================== */
+
+/* 2.1 常规白色系：悬停时透明度提升一级 (20% Step-up) */
+.text-bright    { color: var(--text-bright) !important; transition: color 0.2s ease; }
+.text-primary   { color: var(--text-primary) !important; transition: color 0.2s ease; }
+.text-secondary { color: var(--text-secondary) !important; transition: color 0.2s ease; }
+.text-tertiary  { color: var(--text-tertiary) !important; transition: color 0.2s ease; }
+.text-ghost     { color: var(--text-ghost) !important; transition: color 0.2s ease; }
+
+.text-bright:hover  { color: var(--text-bright) !important; }
+.text-primary:hover { color: var(--text-bright) !important; }
+.text-secondary:hover { color: var(--text-primary) !important; }
+.text-tertiary:hover { color: var(--text-secondary) !important; }
+.text-ghost:hover { color: var(--text-tertiary) !important; }
+
+/* 2.2 品牌系 (蓝色链接) */
+.text-link-blue { 
+    color: var(--color-link-blue) !important; 
+    transition: color 0.2s ease; 
+    text-decoration: underline;
+}
+.text-link-blue:hover { 
+    color: var(--color-link-blue-hover) !important; 
+}
+
+/* 2.3 品牌系 (默认橙色/重点) */
+.text-brand { 
+    color: var(--primary-6) !important; 
+    transition: color 0.2s ease; 
+}
+.text-brand:hover { 
+    color: var(--primary-5) !important; 
+}
+
+/* 2.4 唤醒态：悬停时从白色系切换至品牌橙 (Brand Colorize) */
+.hover-awaken {
+    transition: color 0.2s ease;
+}
+.hover-awaken:hover {
+    color: var(--primary-6) !important;
+}
+
+
+/* ==================================================
+   3. 组件级特殊样式 (Button Matrix)
+   ================================================== */
+
+/* PC-233 High-Fidelity Start Button (同步自 GitHub MyGame) */
+.btn-hifi {
+  position: relative;
+  width: 88px; 
+  height: 36px; 
+  border-radius: 4px; 
+  border: none;
+  font-size: 16px; 
+  font-weight: 700; 
+  color: rgba(255,255,255,0.9);
+  cursor: pointer; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  /* 核心背景：双层渐变叠加 */
+  background: radial-gradient(100% 200% at 50% 0%, rgba(255,114,16,0.75) 0%, rgba(166,61,5,0) 100%), rgba(166,61,5,0.7);
+  box-shadow: 0px 12px 24px 0px rgba(166,61,5,0.4), inset 0px 0px 9px 0px rgba(255,114,16,0.1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* 1px Mask 描边高光层 */
+.btn-hifi::before {
+  content: ''; 
+  position: absolute; 
+  inset: 0; 
+  padding: 0.5px; /* 匹配 MyGame 细致描边 */
+  border-radius: 4px;
+  background: linear-gradient(180deg, rgba(255,245,232,0.8), rgba(255,223,201,0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; 
+  mask-composite: exclude; 
+  pointer-events: none;
+}
+
+.btn-hifi:hover {
+  color: #fff;
+  background: radial-gradient(100% 200% at 50% 0%, rgba(255,114,16,0.9) 0%, rgba(166,61,5,0) 100%), rgba(166,61,5,0.9);
+  transform: scale(1.02);
+}
+
+.btn-hifi:active {
+  transform: scale(0.98);
+}
+
+/* 基础业务按钮 */
+.btn-primary {
+  background-color: var(--primary-6);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 15px;
+}
+.btn-primary:hover {
+  background-color: var(--primary-5);
+  box-shadow: 0 4px 14px var(--primary-0-alpha);
+}
+
+/* 排版工具类 */
+.text-display { font-size: 24px; font-weight: 700; line-height: 1.33; }
+.text-xl      { font-size: 18px; font-weight: 700; line-height: 1.33; }
+.text-lg      { font-size: 16px; font-weight: 700; line-height: 1.375; }
+.text-base    { font-size: 15px; font-weight: 400; line-height: 1.5; }
+.text-sm      { font-size: 14px; font-weight: 400; line-height: 1.428; }
+.text-xs      { font-size: 13px; font-weight: 400; line-height: 1.38; }
