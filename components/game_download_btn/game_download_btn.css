@@ -6,30 +6,56 @@
   position: relative;
   width: 296px;
   height: 48px;
-  border-radius: 6px; /* Matched to .btn--lg */
+  border-radius: 4px;
   background-color: var(--white-5, rgba(255, 255, 255, 0.05));
-  box-shadow: inset 0px 1px 1px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0px 1px 4px 0px rgba(255, 255, 255, 0.15), inset 0px 0px 22px 0px rgba(255, 255, 255, 0.15);
   overflow: hidden;
   cursor: pointer;
   box-sizing: border-box;
   text-decoration: none;
-  font-family: var(--font-family-base);
+  font-family: var(--font-family-base, "Microsoft YaHei UI", sans-serif);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Gradient Stroke using pseudo-element */
+.btn-progress::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 125px;
+  height: 100%;
+  background: radial-gradient(ellipse 77.54% 109.65% at 3.20% 92.71%, rgba(255, 114, 16, 0.20) 0%, rgba(255, 114, 16, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+  animation: breathe-opacity 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes breathe-opacity {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 .btn-progress::after {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  border-radius: inherit;
-  padding: 0.5px; /* Stroke thickness */
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.05) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--white-white-45, rgba(255, 255, 255, 0.45)) 0%, var(--white-white-5, rgba(255, 255, 255, 0.05)) 100%);
+  -webkit-mask: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 296 48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.25' y='0.25' width='295.5' height='47.5' rx='3.75' fill='none' stroke='black' stroke-width='0.5'/%3E%3C/svg%3E");
+  mask: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 296 48' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0.25' y='0.25' width='295.5' height='47.5' rx='3.75' fill='none' stroke='black' stroke-width='0.5'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 4;
+}
+
+.btn-progress--paused::before,
+.btn-progress--installing::before,
+.btn-progress--completed::before,
+.btn-progress--complete-anim::before {
+  animation: none;
+  opacity: 0;
 }
 
 .btn-progress:not(.btn-progress--completed):not(.btn-progress--complete-anim):hover {
@@ -51,20 +77,21 @@
   transition: filter 0.3s ease;
 }
 
-/* For states with icon (Downloading) */
-.btn-progress svg {
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-  display: block;
-  flex-shrink: 0;
-}
-
+/* Icon Standardization */
 .btn-progress__icon-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.btn-progress__icon-wrapper svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .btn-progress__text-group {
@@ -73,7 +100,7 @@
   justify-content: space-between;
   flex: 1;
   padding-left: 8px;
-  padding-right: 20px;
+  padding-right: 16px;
 }
 
 .btn-progress__title {
@@ -115,201 +142,402 @@
   width: 100%;
   z-index: 3;
   pointer-events: none;
-  background: rgba(255, 255, 255, 0.05);
 }
 
 .btn-progress__bar {
+  position: relative;
   height: 100%;
   background-color: var(--primary-6, #FF7210);
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 0 1px 1px 0;
+  border-radius: 0 0px 0px 0;
+  overflow: hidden;
 }
 
-/* Modifiers for Installing State */
-.btn-progress--installing .btn-progress__content {
-  justify-content: center;
+.btn-progress__bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 296px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFE1BD, rgba(255, 255, 255, 0) 100%);
+  animation: progress-sweep 2s linear infinite;
+  transform: translateX(-100%);
 }
 
-.btn-progress--installing .btn-progress__text-group {
-  justify-content: center;
-  padding: 0;
+@keyframes progress-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.btn-progress--paused .btn-progress__bar::after,
+.btn-progress--completed .btn-progress__bar::after {
+  display: none;
 }
 
 /* ==================================================
-   4. Completion Transition (Volumetric Light & Ignition)
+   3-Layer Comet Animation
    ================================================== */
-
-/* Dedicated Animation Layer for Volumetric Blobs */
-.btn-progress__anim-layer {
+.btn-progress__comet-layer {
   position: absolute;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: 1; /* Behind content, above background */
+  z-index: 5;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
-.btn-progress--complete-anim .btn-progress__anim-layer {
+.btn-progress--complete-anim .btn-progress__comet-layer {
   opacity: 1;
 }
 
-/* ORGANIC VOLUMETRIC BLOBS (Natural Scattering Light) */
-.btn-progress__anim-layer .anim-blob {
+.comet-wrap {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(40px);
-  mix-blend-mode: plus-lighter;
-  will-change: transform, opacity;
-  opacity: 0;
+  height: 100%;
+  width: 200%;
+  left: -100%;
+  top: 0;
+  will-change: transform;
 }
 
-/* Blob 1: Bright White/Teal Core */
-.anim-blob--1 {
-  width: 160px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(45, 212, 191, 0.4) 60%, transparent 100%);
-  left: -40px;
-  top: -20px;
+.btn-progress--complete-anim .comet-wrap {
+  animation: comet-move 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Blob 2: Indigo/Blue Ambient */
-.anim-blob--2 {
-  width: 200px;
-  height: 160px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, rgba(79, 70, 229, 0.2) 70%, transparent 100%);
-  right: -60px;
-  bottom: -40px;
+.comet-mist {
+  position: absolute;
+  height: 100%;
+  width: 120px;
+  right: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 114, 16, 0.3), transparent);
+  filter: blur(12px);
+  transform: skewX(-20deg);
 }
 
-/* Blob 3: Warm Orange Accent */
-.anim-blob--3 {
-  width: 180px;
-  height: 140px;
-  background: radial-gradient(circle, rgba(255, 114, 16, 0.6) 0%, rgba(166, 61, 5, 0.3) 70%, transparent 100%);
-  left: 20%;
-  top: 10%;
+.comet-bloom {
+  position: absolute;
+  height: 100%;
+  width: 60px;
+  right: 30px;
+  background: radial-gradient(ellipse at center, rgba(255, 114, 16, 0.6) 0%, transparent 70%);
+  filter: blur(6px);
 }
 
-/* Animation Sequence for Completion */
-.btn-progress--complete-anim .anim-blob--1 {
-  animation: blob-volumetric-1 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.comet-core {
+  position: absolute;
+  height: 100%;
+  width: 12px;
+  right: 54px;
+  background: linear-gradient(90deg, transparent, #ffffff, transparent);
+  box-shadow: 0 0 15px #ffffff;
+  filter: blur(1px);
 }
 
-.btn-progress--complete-anim .anim-blob--2 {
-  animation: blob-volumetric-2 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+@keyframes comet-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(150%); }
 }
 
-.btn-progress--complete-anim .anim-blob--3 {
-  animation: blob-volumetric-3 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+/* ==================================================
+   新方案过渡动效层 (New Transition Layers)
+   ================================================== */
+
+/* 方案 A: 能量液化 (Liquid Rise) */
+.btn-progress__liquid-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(180deg, rgba(255, 149, 73, 0.8) 0%, #FF7210 100%);
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    filter: blur(2px);
+}
+.btn-progress--liquid-anim .btn-progress__liquid-fill {
+    animation: liquid-rise 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes liquid-rise {
+    0% { height: 2px; opacity: 0.5; filter: blur(4px); }
+    30% { opacity: 1; filter: blur(2px); }
+    100% { height: 100%; opacity: 1; filter: blur(0px); }
 }
 
-@keyframes blob-volumetric-1 {
-  0% { transform: translate(-80px, 0) scale(0.6) rotate(0deg); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translate(320px, -20px) scale(1.8) rotate(45deg); opacity: 0; }
+/* 方案 B: 辉光扫掠 (Radiant Sweep) */
+.btn-progress__sweep-layer {
+    position: absolute;
+    inset: -20px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0) 20%, 
+        rgba(255, 255, 255, 0.8) 50%, 
+        rgba(255, 255, 255, 0) 80%, 
+        transparent 100%);
+    z-index: 5;
+    transform: translateX(-100%) skewX(-25deg);
+    pointer-events: none;
+    opacity: 0;
+}
+.btn-progress--sweep-anim .btn-progress__sweep-layer {
+    animation: sweep-bright 0.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes sweep-bright {
+    0% { transform: translateX(-120%) skewX(-25deg); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateX(150%) skewX(-25deg); opacity: 0; }
 }
 
-@keyframes blob-volumetric-2 {
-  0% { transform: translate(80px, 20px) scale(0.5) rotate(0deg); opacity: 0; }
-  40% { opacity: 0.9; }
-  100% { transform: translate(-320px, -40px) scale(2.2) rotate(-30deg); opacity: 0; }
+/* 方案 C: 中心聚变 (Core Expansion) */
+.btn-progress__burst-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #ffffff 0%, #FFB17A 40%, #FF7210 70%, transparent 100%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+    filter: blur(4px);
+}
+.btn-progress--burst-anim .btn-progress__burst-layer {
+    animation: burst-out 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes burst-out {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(6); opacity: 0; }
 }
 
-@keyframes blob-volumetric-3 {
-  0% { transform: scale(0.4) rotate(0deg); opacity: 0; }
-  50% { transform: scale(2.5) rotate(15deg); opacity: 0.8; }
-  100% { transform: scale(2) rotate(30deg); opacity: 0; }
-}
-
-/* Refined Background Transition (Solid to Solid) */
-/* Refined Background Transition */
-.btn-progress--complete-anim {
-  background-color: rgba(166, 61, 5, 0.7); 
-}
-
-/* Synchronized Optical Glow on Text/Icon */
-/* Synchronized Optical Glow on Text/Icon */
-.btn-progress--complete-anim .btn-progress__content {
-  animation: content-optical-brightening 1.2s ease-in-out forwards;
-}
-
-@keyframes content-optical-brightening {
-  0% { filter: brightness(1); }
-  40% { filter: brightness(1.2); }
-  100% { filter: brightness(1); }
-}
-
-/* Final state after animation (EXACT CLONE of .btn--fill) */
+/* ==================================================
+   Completion State (PC-233 HIFI Match)
+   ================================================== */
 .btn-progress--completed {
-  color: var(--white-80);
-  border: none;
   background: 
     radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 114, 16, 0.4) 0%, rgba(166, 61, 5, 0) 100%), 
     rgba(166, 61, 5, 0.7);
-  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), 
-              inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+  border: none;
+}
+
+.btn-progress--completed::after {
+  background: 
+    radial-gradient(ellipse 30px 2px at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, rgba(255, 223, 201, 0.5) 0%, rgba(255, 223, 201, 0.3) 100%);
+  opacity: 1;
 }
 
 .btn-progress--completed:hover {
-  color: var(--white-100);
   background: 
     radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 114, 16, 0.75) 0%, rgba(166, 61, 5, 0) 100%), 
     rgba(166, 61, 5, 0.85);
-  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), 
-              inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+}
+
+.btn-progress--completed .btn-progress__title {
+  color: var(--white-80, rgba(255, 255, 255, 0.8));
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-progress--completed:hover .btn-progress__title {
+  color: var(--white-100, #ffffff);
 }
 
 .btn-progress--completed:active {
-  color: var(--white-60);
   background: 
     radial-gradient(ellipse 50% 80% at 50% 0%, rgba(255, 114, 16, 0.2) 0%, rgba(166, 61, 5, 0) 100%), 
     rgba(166, 61, 5, 0.6);
-  box-shadow: 0px 4px 12px 0px rgba(166, 61, 5, 0.3), 
-              inset 0px 0px 4px 0px rgba(255, 114, 16, 0.05);
+  box-shadow: 0px 4px 12px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 4px 0px rgba(255, 114, 16, 0.05);
 }
 
-/* Use the design system's border stroke (::after) in final state */
-.btn-progress--completed::after {
-  content: ''; position: absolute; inset: 0; padding: 0.5px; border-radius: inherit;
+.btn-progress--completed:active .btn-progress__title {
+  color: var(--white-60, rgba(255, 255, 255, 0.6));
+}
+
+/* Layout adjustments for states */
+.btn-progress--installing .btn-progress__content,
+.btn-progress--completed .btn-progress__content,
+.btn-progress--liquid-anim .btn-progress__content,
+.btn-progress--sweep-anim .btn-progress__content,
+.btn-progress--burst-anim .btn-progress__content {
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-progress--installing .btn-progress__text-group,
+.btn-progress--completed .btn-progress__text-group,
+.btn-progress--liquid-anim .btn-progress__text-group,
+.btn-progress--sweep-anim .btn-progress__text-group,
+.btn-progress--burst-anim .btn-progress__text-group {
+  flex: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.btn-progress--completed .btn-progress__bar-wrapper,
+.btn-progress--completed .btn-progress__size {
+  display: none;
+}
+
+.btn-progress--completed .btn-progress__icon-wrapper {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  transform: translateY(0.5px);
+}
+
+/* 开始游玩按钮 */
+.btn-play {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 296px;
+  height: 48px;
+  border-radius: 4px;
+  background: 
+    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 114, 16, 0.4) 0%, rgba(166, 61, 5, 0) 100%), 
+    rgba(166, 61, 5, 0.7);
+  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: var(--font-family-base, "Microsoft YaHei UI", sans-serif);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+  overflow: hidden;
+}
+
+.btn-play::after {
+  content: ''; 
+  position: absolute; 
+  inset: 0; 
+  padding: 0.5px; 
+  border-radius: inherit;
   background: 
     radial-gradient(ellipse 30px 2px at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
     linear-gradient(180deg, rgba(255, 223, 201, 0.5) 0%, rgba(255, 223, 201, 0.3) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
-  opacity: 1;
+  -webkit-mask-composite: xor; 
+  mask-composite: exclude; 
+  pointer-events: none;
+  z-index: 4;
 }
 
-/* Hide progress and center content in final states */
-.btn-progress--completed .btn-progress__bar-wrapper,
-.btn-progress--complete-anim .btn-progress__bar-wrapper,
-.btn-progress--completed .btn-progress__size,
-.btn-progress--complete-anim .btn-progress__size {
-  display: none;
-}
-
-.btn-progress--completed .btn-progress__content,
-.btn-progress--complete-anim .btn-progress__content {
+.btn-play__content {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 4px; /* Matched to design system .btn gap */
+  gap: 6px;
+  z-index: 2;
+  position: relative;
 }
 
-.btn-progress--completed .btn-progress__icon-wrapper,
-.btn-progress--complete-anim .btn-progress__icon-wrapper {
-  margin: 0;
+.btn-play__icon-wrapper {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+  transform: translateY(0.5px);
 }
 
-.btn-progress--completed .btn-progress__text-group,
-.btn-progress--complete-anim .btn-progress__text-group {
-  flex: none;
-  padding: 0;
+.btn-play__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-play__text {
+  font-family: var(--font-family-base, "Microsoft YaHei UI", sans-serif);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--white-80, rgba(255, 255, 255, 0.8));
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-play:hover {
+  background: 
+    radial-gradient(ellipse 60% 100% at 50% 0%, rgba(255, 114, 16, 0.75) 0%, rgba(166, 61, 5, 0) 100%), 
+    rgba(166, 61, 5, 0.85);
+  box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+}
+
+.btn-play:hover .btn-play__text {
+  color: var(--white-100, #ffffff);
+}
+
+.btn-play:active {
+  background: 
+    radial-gradient(ellipse 50% 80% at 50% 0%, rgba(255, 114, 16, 0.2) 0%, rgba(166, 61, 5, 0) 100%), 
+    rgba(166, 61, 5, 0.6);
+  box-shadow: 0px 4px 12px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 4px 0px rgba(255, 114, 16, 0.05);
+}
+
+.btn-play:active .btn-play__text {
+  color: var(--white-60, rgba(255, 255, 255, 0.6));
+}
+
+/* ==================================================
+   启动游戏动效 (Launch Animation - Final)
+   ================================================== */
+.btn-play--launching {
+  pointer-events: none;
+  animation: launch-pulse 1.5s infinite alternate ease-in-out;
+}
+
+.btn-play--launching .btn-play__text {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Width variations */
-.btn-progress.w-238 { width: 238px; }
-.btn-progress.w-296 { width: 296px; }
-.w-296 { width: 296px; }
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  animation: char-wave 1.6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes char-wave {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(0, -3px, 0);
+    opacity: 1;
+    color: #fff;
+  }
+}
+
+.btn-play--launching .btn-play__icon-wrapper {
+  display: none;
+}
+
+@keyframes launch-pulse {
+  0% {
+    box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+    filter: brightness(1);
+  }
+  100% {
+    box-shadow: 0px 8px 50px 10px rgba(255, 114, 16, 0.35), inset 0px 0px 20px 0px rgba(255, 114, 16, 0.5);
+    filter: brightness(1.04);
+  }
+}
