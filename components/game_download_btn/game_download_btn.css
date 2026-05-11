@@ -1,4 +1,4 @@
-/* f:/aiUI/game_download_btn/game_download_btn.css */
+/* components/game_download_btn/game_download_btn.css */
 .btn-progress {
   display: inline-flex;
   flex-direction: column;
@@ -443,19 +443,20 @@
 /* Installing state: subtle inset shadow breathing */
 .btn-progress--installing {
   cursor: default;
+  background-color: rgba(255, 255, 255, 0.02);
   animation: installing-breathe 2.4s ease-in-out infinite alternate;
 }
 
 @keyframes installing-breathe {
   0% {
     box-shadow:
-      inset 0px 1px 4px 0px rgba(255, 255, 255, 0.08),
-      inset 0px 0px 16px 0px rgba(255, 255, 255, 0.06);
+      inset 0px 1px 4px 0px rgba(255, 255, 255, 0.05),
+      inset 0px 0px 12px 0px rgba(255, 255, 255, 0.03);
   }
   100% {
     box-shadow:
-      inset 0px 1px 4px 0px rgba(255, 255, 255, 0.22),
-      inset 0px 0px 28px 0px rgba(255, 255, 255, 0.14);
+      inset 0px 1px 4px 0px rgba(255, 255, 255, 0.15),
+      inset 0px 0px 24px 0px rgba(255, 255, 255, 0.08);
   }
 }
 
