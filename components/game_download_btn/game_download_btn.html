@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Download Buttons</title>
     <!-- 引入已有的基础按钮样式 -->
-    <link rel="stylesheet" href="../../index.css">
+    <link rel="stylesheet" href="../index.css">
     <!-- 引入新的下载进度按钮样式 -->
     <link rel="stylesheet" href="./game_download_btn.css">
     <style>
@@ -94,11 +94,8 @@
                 <div class="btn-progress btn-progress--installing w-296">
                     <div class="btn-progress__content">
                         <div class="btn-progress__text-group">
-                            <span class="btn-progress__title">模拟器安装中 80%</span>
+                            <span class="btn-progress__title"><span class="char" style="--i:0">模</span><span class="char" style="--i:1">拟</span><span class="char" style="--i:2">器</span><span class="char" style="--i:3">安</span><span class="char" style="--i:4">装</span><span class="char" style="--i:5">中</span></span>
                         </div>
-                    </div>
-                    <div class="btn-progress__bar-wrapper">
-                        <div class="btn-progress__bar" style="width: 80%;"></div>
                     </div>
                 </div>
             </div>
@@ -156,11 +153,8 @@
                 <div class="btn-progress btn-progress--installing w-296">
                     <div class="btn-progress__content">
                         <div class="btn-progress__text-group">
-                            <span class="btn-progress__title">游戏安装中 25%</span>
+                            <span class="btn-progress__title"><span class="char" style="--i:0">游</span><span class="char" style="--i:1">戏</span><span class="char" style="--i:2">安</span><span class="char" style="--i:3">装</span><span class="char" style="--i:4">中</span></span>
                         </div>
-                    </div>
-                    <div class="btn-progress__bar-wrapper">
-                        <div class="btn-progress__bar" style="width: 25%;"></div>
                     </div>
                 </div>
             </div>
@@ -190,24 +184,12 @@
             </div>
         </div>
 
-        <!-- 过渡动效演示入口 -->
-        <h3 class="section-title">完成过渡动效 (方案 A/B/C)</h3>
-        <div class="grid-layout">
-            <div class="demo-column">
-                <span class="group-title">点击查看安装完成过渡动效</span>
-                <a href="./transition_demos.html" class="btn-progress btn-progress--installing w-296" style="text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
-                    <div class="btn-progress__content" style="justify-content:center;">
-                        <div class="btn-progress__text-group" style="flex:none; padding:0;">
-                            <span class="btn-progress__title">→ 查看过渡动效演示</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
+
 
     </div>
 
     <script>
+        // 处理启动游戏的最终动效
         function triggerLaunch() {
             const btn = document.getElementById('main-play-btn');
             const textSpan = document.getElementById('main-play-text');
@@ -222,10 +204,12 @@
             btn.classList.add(animClass);
             const launchText = '游戏启动中';
             
+            // 文字律动处理
             textSpan.innerHTML = launchText.split('').map((char, i) => 
                 `<span class="char" style="--i: ${i}">${char}</span>`
             ).join('');
             
+            // 3秒后自动恢复（模拟启动完成）
             setTimeout(() => {
                 if (btn.classList.contains(animClass)) {
                     btn.classList.remove(animClass);

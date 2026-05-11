@@ -31,8 +31,12 @@
 }
 
 @keyframes breathe-opacity {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 .btn-progress::after {
@@ -58,7 +62,9 @@
   opacity: 0;
 }
 
-.btn-progress:not(.btn-progress--completed):not(.btn-progress--complete-anim):hover {
+/* Removed Gradient Stroke since we are using border property now */
+
+.btn-progress:not(.btn-progress--completed):not(.btn-progress--complete-anim):not(.btn-progress--installing):hover {
   background-color: var(--white-10, rgba(255, 255, 255, 0.1));
 }
 
@@ -166,12 +172,17 @@
 }
 
 @keyframes progress-sweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .btn-progress--paused .btn-progress__bar::after,
-.btn-progress--completed .btn-progress__bar::after {
+.btn-progress--completed .btn-progress__bar::after,
+.btn-progress--installing .btn-progress__bar::after {
   display: none;
 }
 
@@ -205,6 +216,7 @@
   animation: comet-move 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* Layer 1: Trailing Mist (Bottom layer, widest, most blur) */
 .comet-mist {
   position: absolute;
   height: 100%;
@@ -215,6 +227,7 @@
   transform: skewX(-20deg);
 }
 
+/* Layer 2: Bloom (Middle layer, orange glow) */
 .comet-bloom {
   position: absolute;
   height: 100%;
@@ -224,6 +237,7 @@
   filter: blur(6px);
 }
 
+/* Layer 3: Core (Top layer, bright white center) */
 .comet-core {
   position: absolute;
   height: 100%;
@@ -235,8 +249,13 @@
 }
 
 @keyframes comet-move {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(150%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(150%);
+  }
 }
 
 /* ==================================================
@@ -268,7 +287,7 @@
 /* 方案 B: 辉光扫掠 (Radiant Sweep) */
 .btn-progress__sweep-layer {
     position: absolute;
-    inset: -20px;
+    inset: -20px; /* 扩展范围以覆盖模糊边缘 */
     background: linear-gradient(90deg, 
         transparent 0%, 
         rgba(255, 255, 255, 0) 20%, 
@@ -315,6 +334,7 @@
 
 /* ==================================================
    Completion State (PC-233 HIFI Match)
+   Updated to match .btn-play style for consistency
    ================================================== */
 .btn-progress--completed {
   background: 
@@ -324,6 +344,7 @@
   border: none;
 }
 
+/* Update border highlight for completed state to match .btn-play::after */
 .btn-progress--completed::after {
   background: 
     radial-gradient(ellipse 30px 2px at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0) 100%),
@@ -381,9 +402,61 @@
   justify-content: center;
 }
 
+.btn-progress--installing .btn-progress__bar-wrapper,
 .btn-progress--completed .btn-progress__bar-wrapper,
 .btn-progress--completed .btn-progress__size {
   display: none;
+}
+
+/* Installing state: flat solid border (override gradient) */
+.btn-progress--installing::after {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Installing state: Per-character wave animation (matches launching state) */
+.btn-progress--installing .btn-progress__title {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Remove background-clip shimmer — using char-wave instead */
+}
+
+.btn-progress--installing .btn-progress__title .char {
+  animation: char-wave-installing 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation-delay: calc(var(--i) * 0.12s);
+}
+
+@keyframes char-wave-installing {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(0, -2.5px, 0);
+    opacity: 1;
+  }
+}
+
+/* Installing state: subtle inset shadow breathing */
+.btn-progress--installing {
+  cursor: default;
+  animation: installing-breathe 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes installing-breathe {
+  0% {
+    box-shadow:
+      inset 0px 1px 4px 0px rgba(255, 255, 255, 0.08),
+      inset 0px 0px 16px 0px rgba(255, 255, 255, 0.06);
+  }
+  100% {
+    box-shadow:
+      inset 0px 1px 4px 0px rgba(255, 255, 255, 0.22),
+      inset 0px 0px 28px 0px rgba(255, 255, 255, 0.14);
+  }
 }
 
 .btn-progress--completed .btn-progress__icon-wrapper {
@@ -493,11 +566,13 @@
 /* ==================================================
    启动游戏动效 (Launch Animation - Final)
    ================================================== */
+/* 基础动画：文字波浪 */
 .btn-play--launching {
-  pointer-events: none;
+  pointer-events: none; /* 启动中禁用点击 */
   animation: launch-pulse 1.5s infinite alternate ease-in-out;
 }
 
+/* 保持文字稳定并应用波浪效果 */
 .btn-play--launching .btn-play__text {
   position: relative;
   display: flex;
@@ -510,7 +585,7 @@
   will-change: transform, opacity;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); /* 强制 GPU 渲染 */
   animation: char-wave 1.6s infinite cubic-bezier(0.4, 0, 0.2, 1);
   animation-delay: calc(var(--i) * 0.1s);
 }
@@ -521,12 +596,13 @@
     opacity: 0.7;
   }
   50% {
-    transform: translate3d(0, -3px, 0);
+    transform: translate3d(0, -3px, 0); /* 减小位移距离使律动更丝滑 */
     opacity: 1;
     color: #fff;
   }
 }
 
+/* 启动中隐藏图标 */
 .btn-play--launching .btn-play__icon-wrapper {
   display: none;
 }
@@ -537,6 +613,7 @@
     filter: brightness(1);
   }
   100% {
+    /* 增加扩展半径 (10px) 和模糊半径 (50px)，降低透明度 (0.35) 和亮度 (1.04) 以达到“大而不刺眼”的效果 */
     box-shadow: 0px 8px 50px 10px rgba(255, 114, 16, 0.35), inset 0px 0px 20px 0px rgba(255, 114, 16, 0.5);
     filter: brightness(1.04);
   }
