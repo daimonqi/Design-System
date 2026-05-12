@@ -15,7 +15,6 @@
   text-decoration: none;
   font-family: var(--font-family-base, "Microsoft YaHei UI", sans-serif);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translate3d(0, 0, 0); /* Prevent text jitter on Windows */
 }
 
 .btn-progress::before {
@@ -115,8 +114,6 @@
   font-weight: bold;
   color: var(--white-100, #ffffff);
   white-space: nowrap;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .btn-progress__size {
@@ -160,6 +157,27 @@
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0 0px 0px 0;
   overflow: hidden;
+}
+
+.btn-progress__bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 296px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #FFE1BD, rgba(255, 255, 255, 0) 100%);
+  animation: progress-sweep 2s linear infinite;
+  transform: translateX(-100%);
+}
+
+@keyframes progress-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .btn-progress--paused .btn-progress__bar::after,
@@ -395,6 +413,33 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
+/* Installing state: Per-character wave animation (matches launching state) */
+.btn-progress--installing .btn-progress__title {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Remove background-clip shimmer — using char-wave instead */
+}
+
+.btn-progress--installing .btn-progress__title .char {
+  animation: char-wave-installing 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation-delay: calc(var(--i) * 0.12s);
+}
+
+@keyframes char-wave-installing {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(0, -2.5px, 0);
+    opacity: 1;
+  }
+}
+
 /* Installing state: subtle inset shadow breathing */
 .btn-progress--installing {
   cursor: default;
@@ -446,8 +491,6 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
   overflow: hidden;
-  clip-path: inset(-30px -30px -30px -30px); /* Align with 100% keyframe to prevent jump */
-  transform: translate3d(0, 0, 0); /* Prevent text jitter on Windows */
 }
 
 .btn-play::after {
@@ -473,7 +516,6 @@
   gap: 6px;
   z-index: 2;
   position: relative;
-  transform: translate3d(0, 0, 0); /* Maintain GPU layer consistently */
 }
 
 .btn-play__icon-wrapper {
@@ -498,8 +540,6 @@
   line-height: 22px;
   color: var(--white-80, rgba(255, 255, 255, 0.8));
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .btn-play:hover {
@@ -525,13 +565,15 @@
 }
 
 /* ==================================================
-   启动游戏状态 (Launch State)
+   启动游戏动效 (Launch Animation - Final)
    ================================================== */
+/* 基础动画：文字波浪 */
 .btn-play--launching {
   pointer-events: none; /* 启动中禁用点击 */
+  animation: launch-pulse 1.5s infinite alternate ease-in-out;
 }
 
-/* 保持文字稳定 */
+/* 保持文字稳定并应用波浪效果 */
 .btn-play--launching .btn-play__text {
   position: relative;
   display: flex;
@@ -539,143 +581,41 @@
   justify-content: center;
 }
 
+.char {
+  display: inline-block;
+  will-change: transform, opacity;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0); /* 强制 GPU 渲染 */
+  animation: char-wave 1.6s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes char-wave {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(0, -3px, 0); /* 减小位移距离使律动更丝滑 */
+    opacity: 1;
+    color: #fff;
+  }
+}
+
 /* 启动中隐藏图标 */
 .btn-play--launching .btn-play__icon-wrapper {
   display: none;
 }
 
-
-/* ==================================================
-   安装完成过渡动效 (Transition from Installing to Play)
-   ================================================== */
-.btn-transition-wrapper {
-  position: relative;
-  width: 296px;
-  height: 48px;
-  border-radius: 4px;
-  cursor: pointer;
-  overflow: visible;
-  
-  /* ==========================================
-     动画时间中控台 (Animation Timing Control)
-     ========================================== */
-  --anim-duration: 2.0s;                  /* 整体切换的总时间 */
-  --anim-ease: cubic-bezier(0.4, 0, 0.2, 1); /* 平滑的缓入缓出曲线，消除顿挫感 */
-}
-
-/* 按钮重叠布局 */
-.btn-transition-wrapper > .btn-progress,
-.btn-transition-wrapper > .btn-play {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  border: none;
-}
-
-/* 初始状态：安装中显示，开始游戏隐藏 */
-.btn-transition-wrapper .btn-play {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* 1. 整体容器状态 */
-.btn-transition-wrapper.is-transitioning {
-  pointer-events: none; /* 动画期间禁止点击 */
-}
-
-/* 动画期间禁用所有默认 transition，防止与 keyframes 冲突导致重绘卡顿 */
-.btn-transition-wrapper.is-transitioning * {
-  transition: none !important;
-}
-
-/* ==================================================
-   新版无缝光效填充动画 (Seamless Light Fill Transition)
-   分三阶段:
-   1. 辉光汇聚 (Glow Gather)
-   2. 顶部倾泻填充 (Pour Down Fill)
-   3. 内容浮现衔接 (Content Emerge)
-   ================================================== */
-
-/* ==================================================
-   最新方案：从上到下填充 + 内阴影辉光扩展 (Top-to-Bottom Fill + Inner Glow)
-   ================================================== */
-.btn-transition-wrapper.is-transitioning .btn-progress {
-  will-change: transform, clip-path;
-  animation: progress-wipe-down var(--anim-duration) var(--anim-ease) forwards;
-}
-@keyframes progress-wipe-down {
-  0% { 
-    clip-path: inset(-30px -30px -30px -30px); 
-  }
-  60% { 
-    clip-path: inset(100% -30px -30px -30px); 
-  }
-  100% { 
-    clip-path: inset(100% -30px -30px -30px); 
-  }
-}
-
-.btn-transition-wrapper.is-transitioning .btn-play {
-  opacity: 1; /* 必须为1以保证裁剪区域可见 */
-  pointer-events: none;
-  will-change: transform, clip-path, box-shadow;
-  animation: play-fill-down var(--anim-duration) var(--anim-ease) forwards;
-}
-
-/* 添加一个高亮纯色遮罩，在填充时保持明亮，随后自然过渡到最终的深色背景 */
-.btn-transition-wrapper.is-transitioning .btn-play::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #FF7210; /* 高亮橙色 */
-  z-index: 1;
-  pointer-events: none;
-  border-radius: 4px;
-  animation: play-bright-fade var(--anim-duration) var(--anim-ease) forwards;
-}
-
-@keyframes play-bright-fade {
-  0% { opacity: 1; }
-  60% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes play-fill-down {
-  0% { 
-    clip-path: inset(-30px -30px 100% -30px); 
-    box-shadow: 0px 0px 0px 0px rgba(166, 61, 5, 0), inset 0px 0px 0px 0px rgba(255, 114, 16, 0); 
-  }
-  60% {
-    clip-path: inset(-30px -30px -30px -30px); 
-    box-shadow: 0px 0px 0px 0px rgba(166, 61, 5, 0), inset 0px 0px 0px 0px rgba(255, 114, 16, 0); 
-  }
-  100% { 
-    clip-path: inset(-30px -30px -30px -30px); 
-    /* 直接渐变到最终形态：标准的阴影和光感，不再呼吸扩张 */
+@keyframes launch-pulse {
+  0% {
     box-shadow: 0px 8px 16px 0px rgba(166, 61, 5, 0.3), inset 0px 0px 8px 0px rgba(255, 114, 16, 0.1);
+    filter: brightness(1);
   }
-}
-
-/* 文字与图标的滑入浮现，去除blur防止抗锯齿闪烁 */
-.btn-transition-wrapper.is-transitioning .btn-play__content {
-  animation: text-slide-up var(--anim-duration) var(--anim-ease) forwards;
-}
-@keyframes text-slide-up {
-  0% { transform: translate3d(0, 8px, 0); }
-  60% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-
-/* ==================================================
-   动画完成，彻底切换状态
-   ================================================== */
-.btn-transition-wrapper.is-completed .btn-progress {
-  display: none;
-}
-.btn-transition-wrapper.is-completed .btn-play {
-  opacity: 1;
-  pointer-events: auto;
+  100% {
+    /* 增加扩展半径 (10px) 和模糊半径 (50px)，降低透明度 (0.35) 和亮度 (1.04) 以达到“大而不刺眼”的效果 */
+    box-shadow: 0px 8px 50px 10px rgba(255, 114, 16, 0.35), inset 0px 0px 20px 0px rgba(255, 114, 16, 0.5);
+    filter: brightness(1.04);
+  }
 }
